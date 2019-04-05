@@ -24,9 +24,12 @@ def get_hit_count(counter_id):
 @app.route('/')
 @app.route('/<int:counter_id>')
 def hello(counter_id = None):
-    if counter_id and 0 < counter_id <= MAX_COUNTERS:
-        count = get_hit_count(counter_id)
-        return jsonify ( {'result':'Hello World! counter {} has been clicked {} times.\n'.format(counter_id,count)})
+    if counter_id:
+        if 0 < counter_id <= MAX_COUNTERS:
+            count = get_hit_count(counter_id)
+            return jsonify ( {'result':'Hello World! counter {} has been clicked {} times.\n'.format(counter_id,count)})
+        else:
+            return jsonify ( {'result':'Invalid counter ID.'})
     else:
         return render_template('index.html')
 
