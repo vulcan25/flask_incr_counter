@@ -1,0 +1,41 @@
+<html>
+<head>
+	<title> I am a counter </title>
+</head>
+<body>
+
+<!-- The button -->
+<button id="increment" type="button">Increment Me</button>
+
+<!-- Somewhere to display the result -->
+<span id='result'></span>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
+<script type='text/javascript'>
+$(function() {
+
+	// This catches the button click
+    $('#increment').click(function() {
+        
+        // This does the ajax call to the server
+        $.ajax({
+            type: 'GET',
+            // Manually setting the counter id here, you could have as many as you want.
+            url: '/123',
+            success: function(data) {
+            	// updates the span#result with the json result at key 'result':
+                $('#result').html(data['result']);
+            }, error: function (xhr) {
+            	// handle error if redis down:
+                $('#result').html('ERROR: ' + xhr.status + xhr.statusText);
+            }
+        });
+    });
+});
+</script>
+
+</body>
+</html>
