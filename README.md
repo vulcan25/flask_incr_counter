@@ -2,6 +2,8 @@ Redis powered flask upload counter, based on the example at https://docs.docker.
 
 This one has a button and implements AJAX to do the server call.
 
+![screencap](https://i.imgur.com/Nmm1GGS.png)
+
 # Usage
 
 Clone repo:
@@ -17,7 +19,6 @@ Launch:
 
     docker-compose up
 
-Connect to `http://localhost:5000` and start clicking the button:
+Connect to `http://localhost:5000` and start clicking the button.
 
-![screencap][https://i.imgur.com/Nmm1GGS.png]
 
