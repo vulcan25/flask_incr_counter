@@ -8,11 +8,11 @@ app = Flask(__name__)
 cache = redis.Redis(host='redis', port=6379)
 
 
-def get_hit_count():
+def get_hit_count(counter_id):
     retries = 5
     while True:
         try:
-            return cache.incr('hits')
+            return cache.incr(str(counter_id) + ':hits')
         except redis.exceptions.ConnectionError as exc:
             if retries == 0:
                 raise exc
@@ -23,8 +23,8 @@ def get_hit_count():
 @app.route('/<int:counter_id>')
 def hello(counter_id = None):
     if counter_id:
-        count = get_hit_count()
-        return jsonify ( {'result':'Hello World! I have been seen {} times.\n'.format(count)})
+        count = get_hit_count(counter_id)
+        return jsonify ( {'result':'Hello World! counter {} has been clicked {} times.\n'.format(counter_id,count)})
     else:
         return render_template('index.html')
 

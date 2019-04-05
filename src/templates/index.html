@@ -5,7 +5,8 @@
 <body>
 
 <!-- The button -->
-<button id="increment" type="button">Increment Me</button>
+<button class="increment" id='1' type="button">Increment Number 1</button>
+<button class="increment" id='2' type="button">Increment Number 2</button>
 
 <!-- Somewhere to display the result -->
 <span id='result'></span>
@@ -18,13 +19,13 @@
 $(function() {
 
 	// This catches the button click
-    $('#increment').click(function() {
+    $('.increment').click(function() {
         
         // This does the ajax call to the server
         $.ajax({
             type: 'GET',
-            // Manually setting the counter id here, you could have as many as you want.
-            url: '/123',
+            // counter ID is set based on id of button
+            url: '/'+ this.id,
             success: function(data) {
             	// updates the span#result with the json result at key 'result':
                 $('#result').html(data['result']);
